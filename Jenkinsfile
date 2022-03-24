@@ -1,10 +1,18 @@
 pipeline {
-    agent any
+    agent none
     stages {
-        stage('checkout') { 
-            steps {
-              sh "git clone https://github.com/ambareeshns/hello-world-war"
-            }
-        }
-    }
+        
+      stage('run-parallel-branches') {
+  steps {
+    parallel(
+      a: {
+        echo "This is branch a"
+      },
+      b: {
+        echo "This is branch b"
+      }
+    )
+  }
+}
+}
 }
