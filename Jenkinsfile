@@ -1,20 +1,23 @@
 pipeline {
-    agent none
+    agent any
     stages {
-        
-      stage('run-parallel-branches') {
-  steps {
-    parallel(
-      a: {
-        echo "This is branch x"
-      },
-        steps {
-      b: {
-        echo "This is branch y"
-      }
+        stage('Run Tests') {
+            parallel {
+                stage('Test On Windows') {
+                    
+                    steps {
+                        sh "echo stage 1"
+                    }
+                    
+                }
+                stage('Test On Linux') {
+                    
+                    steps {
+                        sh "echo stage 2"
+                    }
+                   
+                }
+            }
         }
-    )
-  }
-}
-}
+    }
 }
