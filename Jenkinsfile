@@ -1,23 +1,13 @@
 pipeline {
-    agent any
+    agent { label 'slave1' }
     stages {
-        stage('Run Tests') {
-            parallel {
-                stage('Test On Windows') {
-                    
-                    steps {
-                        sh "echo stage 1"
-                    }
-                    
-                }
-                stage('Test On Linux') {
-                    
-                    steps {
-                        sh "echo stage 2"
-                    }
-                   
-                }
+        stage("maven instalation"){
+            steps{
+                sh "apt install maven"
             }
         }
+        
+        
     }
+    
 }
